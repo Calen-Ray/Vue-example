@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My Todo List</title>
+    <!-- Add your styles here! -->
+    <link rel="stylesheet" href="css/site.css" />
+</head>
+<body>
+    <div  id="app">
+        <div class='tops'>
+            <h1>
+                Todo list
+            </h1>
+            <h3>
+                To mark complete, click the text of the sticky note. 
+                To delete click the note itself (after it has been completed).
+            </h3>
+            <div>
+                <input v-model='text' id='newtext' placeholder="Todo info goes here" v-on:keyup.13="addTodo">
+                <button v-on:click='addTodo'>ADD</button>
+            </div>
+        </div>
+        <div class='todo-area'>
+            <div v-for='todo in todos'>
+                <div class="note-container" v-if='todo.completed === false'>
+                    <img v-bind:src="todo.note" alt="">
+                    <p v-on:click='complete(todo.id)'>
+                        {{todo.title}}
+                    </p>
+                    </div>
+            </div>
+        </div>
+
+        <div class="todo-area-completed">
+            <div v-for='todo in todos' v-bind:key='todo.id'>
+                <div class="note-container" v-if='todo.completed === true'>
+                    <img v-bind:src="todo.note" alt="" v-on:click='deleteMe(todo.id)'>
+                    <p v-on:click='complete(todo.id)'>
+                        {{todo.title}}
+                    </p>
+                    </div>
+            </div>
+        </div>
+    </div>
+        
+        <!-- Include Vue from a CDN of your choice, I chose unpkg -->
+    <script src="https://unpkg.com/vue"></script>
+    <!-- Include your code here... -->
+    <script src="js/site.js"></script>
+</body>
+</html>
